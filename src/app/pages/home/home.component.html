@@ -1,0 +1,12 @@
+<app-view-home
+  [currentAccount]="currentAccount"
+  [currentNetwork]="currentNetwork"
+  [contract]="contract"
+  [contractUrl]="contractUrl"
+  [deployTransaction]="deployTransaction"
+  [greets]="greets"
+  (connectToMetaMask)="appConnectToMetaMask()"
+  (deployGreeterContract)="appDeployGreeterContract()"
+  (callGreetFunction)="appCallGreetFunction()"
+  (callSetGreetingFunction)="appCallSetGreetingFunction($event)"
+></app-view-home>
