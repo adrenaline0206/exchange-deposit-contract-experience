@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ethers } from 'ethers';
+import { urlConfig } from 'src/common/constants/types';
 
 @Component({
   selector: 'app-view-home',
@@ -10,7 +11,6 @@ export class ViewHomeComponent implements OnInit {
   @Input() currentAccount?: string;
   @Input() currentNetwork?: string;
   @Input() contract?: ethers.Contract;
-  @Input() contractUrl?: string;
   @Input() deployTransaction?: ethers.providers.TransactionResponse;
   @Input() greets?: string[];
 
@@ -18,6 +18,7 @@ export class ViewHomeComponent implements OnInit {
   @Output() deployGreeterContract = new EventEmitter();
   @Output() callGreetFunction = new EventEmitter();
   @Output() callSetGreetingFunction = new EventEmitter();
+  @Output() goToLink = new EventEmitter();
 
   constructor() {
 
@@ -25,8 +26,8 @@ export class ViewHomeComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  onConnectToMetaMask(): void {
-    this.connectToMetaMask.emit();
+  onGoToLink(urlConf: urlConfig): void {
+    this.goToLink.emit(urlConf);
   }
 
   onDeployGreeterContract(): void {

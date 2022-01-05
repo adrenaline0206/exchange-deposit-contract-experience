@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ethers } from 'ethers';
-import { ETEREUM_NETWORK_ID } from 'src/common/constants/values';
+import { urlConfig } from 'src/common/constants/types';
+import { ETEREUM_NETWORK_ID, ETHER_SCAN_BASE_URL } from 'src/common/constants/values';
 import { greeterContract } from '../../../../contracts/greeter/greeter'
 
 @Component({
@@ -21,8 +22,6 @@ export class HomeComponent implements OnInit {
   signer?: ethers.providers.JsonRpcSigner;
   contractFactory?: ethers.ContractFactory;
   contract?: ethers.Contract;
-  baseUrl?: string;
-  contractUrl?: string;
   contractAddress?: string;
   deployTransaction?: ethers.providers.TransactionResponse;
   greets: string[];
@@ -31,7 +30,6 @@ export class HomeComponent implements OnInit {
 
   constructor() {
     this.greets = [];
-    this.baseUrl = 'https://rinkeby.etherscan.io/address/';
   }
 
   ngOnInit(): void { }
@@ -72,10 +70,6 @@ export class HomeComponent implements OnInit {
     this.currentNetwork = ETEREUM_NETWORK_ID[`${(window as any).ethereum.networkVersion}`] ;
   }
 
-  // async openEtherscan(): Promise<void> {
-  //   window.open(rootPath)
-  // }
-
   async appDeployGreeterContract(): Promise<void> {
     await this.appConnectToMetaMask();
     this.provider = new ethers.providers.Web3Provider((window as any).ethereum);
@@ -84,7 +78,6 @@ export class HomeComponent implements OnInit {
     this.contract = await this.contractFactory.deploy("Hello, world!");
     console.log('contract', this.contract);
     this.contractAddress = this.contract.address;
-    this.contractUrl = `${this.baseUrl + this.contractAddress}`;
     console.log('contractAddress', this.contractAddress);
     this.deployTransaction = this.contract.deployTransaction;
     console.log('deployTransaction', this.deployTransaction);
@@ -111,5 +104,17 @@ export class HomeComponent implements OnInit {
     console.log('setGreetingTransaction', this.setGreetingTransaction);
     await this.setGreetingTransaction?.wait(1);
     console.log('setGreetingTransaction is 1 confirmed');
+  }
+
+  goToLink(urlConf: urlConfig): void {
+    let contractAddress
+    if(urlConf.urlType == 'address') {
+      contractAddress = `${ETHER_SCAN_BASE_URL + 'address/' + urlConf.url}`;
+    } else if(urlConf.urlType == 'tx') {
+      contractAddress = `${ETHER_SCAN_BASE_URL + 'tx/' + urlConf.url}`;
+    } else {
+      console.error('urlType does not exist');
+    }
+    window.open(contractAddress, '_blank');
   }
 }
