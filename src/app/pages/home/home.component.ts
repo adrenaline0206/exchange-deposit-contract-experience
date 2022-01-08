@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ethers } from 'ethers';
-import { urlConfig } from 'src/common/constants/types';
 import { ETEREUM_NETWORK_ID, ETHER_SCAN_BASE_URL } from 'src/common/constants/values';
 import { greeterContract } from '../../../../contracts/greeter/greeter'
 
@@ -48,6 +47,7 @@ export class HomeComponent implements OnInit {
       return;
     }
     try {
+      // https://docs.metamask.io/guide/rpc-api.html#table-of-contents
       this.accounts = await ethereum.request({ method: 'eth_requestAccounts' });
       console.log('accounts', this.accounts);
     } catch (error) {
@@ -106,15 +106,7 @@ export class HomeComponent implements OnInit {
     console.log('setGreetingTransaction is 1 confirmed');
   }
 
-  goToLink(urlConf: urlConfig): void {
-    let contractAddress
-    if(urlConf.urlType == 'address') {
-      contractAddress = `${ETHER_SCAN_BASE_URL + 'address/' + urlConf.url}`;
-    } else if(urlConf.urlType == 'tx') {
-      contractAddress = `${ETHER_SCAN_BASE_URL + 'tx/' + urlConf.url}`;
-    } else {
-      console.error('urlType does not exist');
-    }
-    window.open(contractAddress, '_blank');
+  goToLink(path: string): void {
+    window.open(`${ETHER_SCAN_BASE_URL + path}`, '_blank');
   }
 }

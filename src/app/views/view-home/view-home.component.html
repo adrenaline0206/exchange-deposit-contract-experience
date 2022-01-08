@@ -4,10 +4,10 @@
 <div>Current Address: {{ currentAccount }}</div>
 <div>Current Network: {{ currentNetwork }}</div>
 <div>Contract Address:
-  <a (click)="onGoToLink({url: contract!.address, urlType: 'address'})">{{ contract?.address }}</a>
+  <a (click)="onGoToLink('address/' + contract!.address)">{{ contract?.address }}</a>
 </div>
 <div>Deploy Transaction Hash:
-  <a (click)="onGoToLink({url: deployTransaction!.hash, urlType: 'tx'})">{{ deployTransaction?.hash }}</a>
+  <a (click)="onGoToLink('tx/' + deployTransaction!.hash)">{{ deployTransaction?.hash }}</a>
 </div>
 <button class="btn btn-primary" (click)="onDeployGreeterContract()">Deploy</button>
 

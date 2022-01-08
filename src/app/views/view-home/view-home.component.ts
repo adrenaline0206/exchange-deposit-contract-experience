@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ethers } from 'ethers';
-import { urlConfig } from 'src/common/constants/types';
 
 @Component({
   selector: 'app-view-home',
@@ -26,8 +25,8 @@ export class ViewHomeComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  onGoToLink(urlConf: urlConfig): void {
-    this.goToLink.emit(urlConf);
+  onGoToLink(etherScanUrl: string): void {
+    this.goToLink.emit(etherScanUrl);
   }
 
   onDeployGreeterContract(): void {
