@@ -1,15 +1,35 @@
 <h1 class="display-5">Smart Lending</h1>
 
-<h2>Deploy Greeter Contract</h2>
-<div>Current Address: {{ currentAccount }}</div>
-<div>Current Network: {{ currentNetwork }}</div>
+<h2>Status</h2>
+<div>Your Current Address: {{ currentAccount }}</div>
+<div>Your Current Network: {{ currentNetwork }}</div>
+
+<h2>Deploy Contract</h2>
 <div>Contract Address:
   <a (click)="onGoToLink('address/' + contract!.address)">{{ contract?.address }}</a>
 </div>
 <div>Deploy Transaction Hash:
   <a (click)="onGoToLink('tx/' + deployTransaction!.hash)">{{ deployTransaction?.hash }}</a>
 </div>
-<button class="btn btn-primary" (click)="onDeployGreeterContract()">Deploy</button>
+<br>
+<button class="btn btn-primary" (click)="onDeploySendFundsContract()">Deploy</button>
+
+<h2>Set Smart Lending!</h2>
+<form #formRef="ngForm" (submit)="onCallSetSendFundsFunction(sendAmountRef.value)">
+  <div class="form-control">
+    <label class="label">
+      <span class="label-text">Lending amount</span>
+    </label>
+    <input
+    class="input input-bordered"
+    type="text"
+    #sendAmountRef
+    name="sendAmount"
+    required
+    />
+  </div>
+  <button class="btn btn-primary" [disabled]="formRef.invalid">Set Lending</button>
+</form>
 
 <h2>Call greet function</h2>
 <h3>Greeting Message History</h3>
@@ -17,21 +37,3 @@
   <div>{{ greet }}</div>
 </ng-container>
 <button class="btn btn-primary" (click)="onCallGreetFunction()">Greet</button>
-
-<h2>Call set greeting function</h2>
-<form #formRef="ngForm" (submit)="onCallSetGreetingFunction(newGreetingMessageRef.value)">
-  <div class="form-control">
-    <label class="label">
-      <span class="label-text">New Greeting Message</span>
-    </label>
-    <input
-    class="input input-bordered"
-    type="text"
-    #newGreetingMessageRef
-    name="newGreetingMessage"
-    required
-    />
-  </div>
-  <button class="btn btn-primary" [disabled]="formRef.invalid">Set New Message</button>
-</form>
-

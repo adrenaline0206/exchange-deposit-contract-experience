@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: Unlicense
-pragma solidity 0.6.11;
+pragma solidity >=0.6.11;
 
 import '@openzeppelin/contracts/math/SafeMath.sol';
 

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.6.11;
+pragma solidity >=0.6.11;
 
 contract ProxyFactory {
     /// @dev See comment below for explanation of the proxy INIT_CODE

@@ -6,7 +6,9 @@
   [greets]="greets"
   (connectToMetaMask)="appConnectToMetaMask()"
   (deployGreeterContract)="appDeployGreeterContract()"
+  (deploySendFundsContract)="appDeploySendFundsContract()"
   (callGreetFunction)="appCallGreetFunction()"
   (callSetGreetingFunction)="appCallSetGreetingFunction($event)"
+  (callSetSendFundsFunction)="appCallSendFundsFunction($event)"
   (goToLink)="goToLink($event)"
 ></app-view-home>

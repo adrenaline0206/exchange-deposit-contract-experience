@@ -15,8 +15,10 @@ export class ViewHomeComponent implements OnInit {
 
   @Output() connectToMetaMask = new EventEmitter();
   @Output() deployGreeterContract = new EventEmitter();
+  @Output() deploySendFundsContract = new EventEmitter();
   @Output() callGreetFunction = new EventEmitter();
   @Output() callSetGreetingFunction = new EventEmitter();
+  @Output() callSetSendFundsFunction = new EventEmitter();
   @Output() goToLink = new EventEmitter();
 
   constructor() {
@@ -33,11 +35,19 @@ export class ViewHomeComponent implements OnInit {
     this.deployGreeterContract.emit();
   }
 
+  onDeploySendFundsContract(): void {
+    this.deploySendFundsContract.emit();
+  }
+
   onCallGreetFunction(): void{
     this.callGreetFunction.emit();
   }
 
   onCallSetGreetingFunction(newGreetingMessage: string): void {
     this.callSetGreetingFunction.emit(newGreetingMessage);
+  }
+
+  onCallSetSendFundsFunction(sendAmount: string): void {
+    this.callSetSendFundsFunction.emit(sendAmount);
   }
 }

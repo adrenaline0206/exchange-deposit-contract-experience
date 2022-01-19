@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ethers } from 'ethers';
 import { ETEREUM_NETWORK_ID, ETHER_SCAN_BASE_URL } from 'src/common/constants/values';
-import { greeterContract } from '../../../../contracts/greeter/greeter'
+import { sendFundsContract } from '../../../../contracts/json/SendFunds '
 
 @Component({
   selector: 'app-home',
@@ -9,8 +9,8 @@ import { greeterContract } from '../../../../contracts/greeter/greeter'
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  abi = greeterContract.abi;
-  bytecode = greeterContract.bytecode;
+  abi = sendFundsContract.abi;
+  bytecode = sendFundsContract.bytecode;
   isEthereumReady?: boolean;
   isMetaMask?: boolean;
   isConnectedToMetaMask?: boolean;
@@ -22,13 +22,17 @@ export class HomeComponent implements OnInit {
   contractFactory?: ethers.ContractFactory;
   contract?: ethers.Contract;
   contractAddress?: string;
+  deployNewInstanceAddress?: string;
   deployTransaction?: ethers.providers.TransactionResponse;
   greets: string[];
   greetingMessage?: string;
   setGreetingTransaction?: ethers.providers.TransactionResponse;
+  setSendFoundsTransaction?: ethers.providers.TransactionResponse;
 
   constructor() {
     this.greets = [];
+    this.deployNewInstanceAddress = "0x94725B3B1e8DCacE3C815D1a9556D929847658aD";
+    this.appConnectToMetaMask();
   }
 
   ngOnInit(): void { }
@@ -68,10 +72,12 @@ export class HomeComponent implements OnInit {
       return;
     }
     this.currentNetwork = ETEREUM_NETWORK_ID[`${(window as any).ethereum.networkVersion}`] ;
+    if (this.currentNetwork !== 'Rinkeby') {
+      throw new Error('This netWork does not Rinkeby!')
+    }
   }
 
   async appDeployGreeterContract(): Promise<void> {
-    await this.appConnectToMetaMask();
     this.provider = new ethers.providers.Web3Provider((window as any).ethereum);
     this.signer = this.provider.getSigner();
     this.contractFactory = new ethers.ContractFactory(this.abi, this.bytecode, this.signer);
@@ -83,6 +89,32 @@ export class HomeComponent implements OnInit {
     console.log('deployTransaction', this.deployTransaction);
     await this.contract.deployTransaction.wait(1);
     console.log('deployTransaction is 1 confirmed');
+  }
+
+  async appDeploySendFundsContract(): Promise<void> {
+    this.provider = new ethers.providers.Web3Provider((window as any).ethereum);
+    this.signer = this.provider.getSigner();
+    this.contractFactory = new ethers.ContractFactory(this.abi, this.bytecode, this.signer);
+    this.contract = await this.contractFactory.deploy();
+    console.log('contract', this.contract);
+    this.contractAddress = this.contractAddress;
+    console.log('contractAddress', this.contractAddress);
+    this.deployTransaction = this.contract.deployTransaction;
+    console.log('deployTransaction', this.deployTransaction);
+    await this.contract.deployTransaction.wait(1);
+    console.log('deployTransaction is 1 confirmed');
+  }
+
+  async appCallSendFundsFunction(sendAmount: string, sendAddress?: string): Promise<void> {
+    if(this.contract === undefined && this.contractAddress !== undefined && this.provider !== undefined) {
+      this.contract = new ethers.Contract(this.contractAddress, this.abi, this.provider);
+    }
+    sendAddress = this.deployNewInstanceAddress!;
+    const amount = Number(sendAmount);
+    this.setSendFoundsTransaction = await this.contract?.['sendFunds'](amount, sendAddress);
+    console.log('sendFundsTransaction', this.setSendFoundsTransaction);
+    await this.setSendFoundsTransaction?.wait(1);
+    console.log('sendFundsTransaction is 1 confirmed');
   }
 
   async appCallGreetFunction(): Promise<void> {
