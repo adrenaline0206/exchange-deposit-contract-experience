@@ -4,7 +4,7 @@
 <div>Your Current Address: {{ currentAccount }}</div>
 <div>Your Current Network: {{ currentNetwork }}</div>
 
-<h2>Deploy Contract</h2>
+<h2>Deploy Proxy Factory Contract</h2>
 <div>Contract Address:
   <a (click)="onGoToLink('address/' + contract!.address)">{{ contract?.address }}</a>
 </div>
@@ -12,7 +12,28 @@
   <a (click)="onGoToLink('tx/' + deployTransaction!.hash)">{{ deployTransaction?.hash }}</a>
 </div>
 <br>
-<button class="btn btn-primary" (click)="onDeploySendFundsContract()">Deploy</button>
+<button class="btn btn-primary" (click)="onDeployProxyFactoryContract()">Deploy</button>
+
+<h2>App DeployNewInstance</h2>
+<div>Contract Address:
+  <a (click)="onGoToLink('address/' + contract!.address)">{{ deployNewInstanceTransactionHash }}</a>
+</div>
+<br>
+<form #formRef="ngForm">
+  <div class="form-control">
+    <label class="label">
+      <span class="label-text">Lending amount</span>
+    </label>
+    <input
+    class="input input-bordered"
+    type="text"
+    #saltRef
+    name="setSalt"
+    required
+    />
+  </div>
+  <button class="btn btn-primary" (click)="onCallSetDeployNewInstance(saltRef.value)" [disabled]="formRef.invalid">Set Salt</button>
+</form>
 
 <h2>Set Smart Lending!</h2>
 <form #formRef="ngForm" (submit)="onCallSetSendFundsFunction(sendAmountRef.value)">
@@ -37,3 +58,11 @@
   <div>{{ greet }}</div>
 </ng-container>
 <button class="btn btn-primary" (click)="onCallGreetFunction()">Greet</button>
+
+<h2>App DeployNewInstance</h2>
+<div>Contract Address:
+  <a (click)="onGoToLink('address/' + contract!.address)">{{ contract?.address }}</a>
+</div>
+<div>Deploy Transaction Hash:
+  <a (click)="onGoToLink('tx/' + deployTransaction!.hash)">{{ deployTransaction?.hash }}</a>
+</div>

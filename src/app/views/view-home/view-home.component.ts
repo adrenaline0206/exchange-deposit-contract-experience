@@ -9,16 +9,18 @@ import { ethers } from 'ethers';
 export class ViewHomeComponent implements OnInit {
   @Input() currentAccount?: string;
   @Input() currentNetwork?: string;
+  @Input() deployNewInstanceTransactionHash?:string;
   @Input() contract?: ethers.Contract;
   @Input() deployTransaction?: ethers.providers.TransactionResponse;
+  @Input() setDeployNewInstanceTransaction?: ethers.providers.TransactionResponse;
   @Input() greets?: string[];
 
   @Output() connectToMetaMask = new EventEmitter();
-  @Output() deployGreeterContract = new EventEmitter();
-  @Output() deploySendFundsContract = new EventEmitter();
+  @Output() deployProxyFactoryContract = new EventEmitter();
   @Output() callGreetFunction = new EventEmitter();
   @Output() callSetGreetingFunction = new EventEmitter();
-  @Output() callSetSendFundsFunction = new EventEmitter();
+  @Output() callSetDeployNewInstance = new EventEmitter();
+  @Output() callSendEther = new EventEmitter();
   @Output() goToLink = new EventEmitter();
 
   constructor() {
@@ -31,12 +33,8 @@ export class ViewHomeComponent implements OnInit {
     this.goToLink.emit(etherScanUrl);
   }
 
-  onDeployGreeterContract(): void {
-    this.deployGreeterContract.emit();
-  }
-
-  onDeploySendFundsContract(): void {
-    this.deploySendFundsContract.emit();
+  onDeployProxyFactoryContract(): void {
+    this.deployProxyFactoryContract.emit();
   }
 
   onCallGreetFunction(): void{
@@ -47,7 +45,11 @@ export class ViewHomeComponent implements OnInit {
     this.callSetGreetingFunction.emit(newGreetingMessage);
   }
 
+  onCallSetDeployNewInstance(salt: string): void {
+    this.callSetDeployNewInstance.emit(salt);
+  }
+
   onCallSetSendFundsFunction(sendAmount: string): void {
-    this.callSetSendFundsFunction.emit(sendAmount);
+    this.callSendEther.emit(sendAmount);
   }
 }
