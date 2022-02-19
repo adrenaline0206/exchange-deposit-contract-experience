@@ -16,13 +16,15 @@
 
 <h2>App DeployNewInstance</h2>
 <div>Contract Address:
-  <a (click)="onGoToLink('address/' + contract!.address)">{{ deployNewInstanceTransactionHash }}</a>
+  <a (click)="onGoToLink('tx/' + deployNewInstanceTransactionHash)">{{ deployNewInstanceTransactionHash }}</a>
 </div>
 <br>
 <form #formRef="ngForm">
   <div class="form-control">
+    salt example: 0x0000000000000000000000AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA00
+    <br>
     <label class="label">
-      <span class="label-text">Lending amount</span>
+      <span class="label-text">salt</span>
     </label>
     <input
     class="input input-bordered"
@@ -35,7 +37,23 @@
   <button class="btn btn-primary" (click)="onCallSetDeployNewInstance(saltRef.value)" [disabled]="formRef.invalid">Set Salt</button>
 </form>
 
-<h2>Set Smart Lending!</h2>
+<h2>Let's start Smart Lending!</h2>
+<form #formRef="ngForm" (submit)="onCallSetSendAddressFunction(sendAddressRef.value)">
+  <div class="form-control">
+    <label class="label">
+      <span class="label-text">Lending address</span>
+    </label>
+    <input
+    class="input input-bordered"
+    type="text"
+    #sendAddressRef
+    name="sendAddress"
+    required
+    />
+  </div>
+  <button class="btn btn-primary" [disabled]="formRef.invalid">Set Address</button>
+</form>
+<br>
 <form #formRef="ngForm" (submit)="onCallSetSendFundsFunction(sendAmountRef.value)">
   <div class="form-control">
     <label class="label">
@@ -51,18 +69,3 @@
   </div>
   <button class="btn btn-primary" [disabled]="formRef.invalid">Set Lending</button>
 </form>
-
-<h2>Call greet function</h2>
-<h3>Greeting Message History</h3>
-<ng-container *ngFor="let greet of greets">
-  <div>{{ greet }}</div>
-</ng-container>
-<button class="btn btn-primary" (click)="onCallGreetFunction()">Greet</button>
-
-<h2>App DeployNewInstance</h2>
-<div>Contract Address:
-  <a (click)="onGoToLink('address/' + contract!.address)">{{ contract?.address }}</a>
-</div>
-<div>Deploy Transaction Hash:
-  <a (click)="onGoToLink('tx/' + deployTransaction!.hash)">{{ deployTransaction?.hash }}</a>
-</div>

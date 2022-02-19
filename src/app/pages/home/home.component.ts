@@ -26,13 +26,9 @@ export class HomeComponent implements OnInit {
   deployTransaction?: ethers.providers.TransactionResponse;
   setDeployNewInstanceTransaction?: ethers.providers.TransactionResponse;
   deployNewInstanceTransactionHash?: string;
-  greets: string[];
-  greetingMessage?: string;
   setSendFoundsTransaction?: ethers.providers.TransactionResponse;
-  setGreetingTransaction?: ethers.providers.TransactionResponse;
 
   constructor() {
-    this.greets = [];
     this.appConnectToMetaMask();
   }
 
@@ -78,32 +74,18 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  // async appDeployGreeterContract(): Promise<void> {
-  //   this.provider = new ethers.providers.Web3Provider((window as any).ethereum);
-  //   this.signer = this.provider.getSigner();
-  //   this.contractFactory = new ethers.ContractFactory(this.abi, this.bytecode, this.signer);
-  //   this.contract = await this.contractFactory.deploy("Hello, world!");
-  //   console.log('contract', this.contract);
-  //   this.contractAddress = this.contract.address;
-  //   console.log('contractAddress', this.contractAddress);
-  //   this.deployTransaction = this.contract.deployTransaction;
-  //   console.log('deployTransaction', this.deployTransaction);
-  //   await this.contract.deployTransaction.wait(1);
-  //   console.log('deployTransaction is 1 confirmed');
-  // }
-
   async appDeployProxyFactoryContract(): Promise<void> {
     this.provider = new ethers.providers.Web3Provider((window as any ).ethereum);
     this.signer = this.provider.getSigner();
     this.contractFactory = new ethers.ContractFactory(this.proxyFactoryAbi, this.proxyFactoryBytecode, this.signer);
     this.contract = await this.contractFactory.deploy(EXCHANGE_DEPOSIT_CONTRACT_ADDRESS);
     console.log('contract', this.contract);
-    this.contractAddress = this.contract.address;
     console.log('contractAddress', this.contractAddress);
-    this.deployTransaction = this.contract.deployTransaction;
     console.log('deployTransaction', this.deployTransaction);
+    this.contractAddress = this.contract.address;
     await this.contract.deployTransaction.wait(1);
     console.log(`deployTransaction is 1 confirmed`);
+    this.deployTransaction = this.contract.deployTransaction;
   }
 
   async appCallSetDeployNewInstance(salt: string): Promise<void> {
@@ -115,6 +97,13 @@ export class HomeComponent implements OnInit {
     await this.setDeployNewInstanceTransaction?.wait(1);
     console.log('setDeployNewInstanceTransaction is 1 confirmation');
     this.deployNewInstanceTransactionHash = this.setDeployNewInstanceTransaction?.hash;
+  }
+
+  async setSendAddress(sendAddress: string): Promise<void> {
+    if(!ethers.utils.isAddress(`${sendAddress}`)){
+      throw new Error('invalid address')
+    }
+    this.deployNewInstanceAddress = sendAddress;
   }
 
   async sendEther(sender: string, receiver: string, sendAmount: string): Promise<void> {
@@ -138,27 +127,6 @@ export class HomeComponent implements OnInit {
     }
     this.sendEther(this.currentAccount, this.deployNewInstanceAddress, sendAmount);
   }
-
-  // async appCallGreetFunction(): Promise<void> {
-  //   if (this.contract === undefined && this.contractAddress !== undefined && this.provider !== undefined) {
-  //     this.contract = new ethers.Contract(this.contractAddress, this.abi, this.provider);
-  //   }
-  //   this.greetingMessage = await this.contract?.['greet']();
-  //   console.log('greetingMessage', this.greetingMessage);
-  //   if (this.greetingMessage) {
-  //     this.greets.push(this.greetingMessage);
-  //   }
-  // }
-
-  // async appCallSetGreetingFunction(newGreetingMessage: string): Promise<void> {
-  //   if (this.contract === undefined && this.contractAddress !== undefined && this.provider !== undefined) {
-  //     this.contract = new ethers.Contract(this.contractAddress, this.abi, this.provider);
-  //   }
-  //   this.setGreetingTransaction = await this.contract?.['setGreeting'](newGreetingMessage);
-  //   console.log('setGreetingTransaction', this.setGreetingTransaction);
-  //   await this.setGreetingTransaction?.wait(1);
-  //   console.log('setGreetingTransaction is 1 confirmed');
-  // }
 
   goToLink(path: string): void {
     window.open(`${ETHER_SCAN_BASE_URL + path}`, '_blank');

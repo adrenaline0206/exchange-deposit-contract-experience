@@ -16,13 +16,19 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2017",
-    "module": "es2020",
+    "target": "es2018",
+    "module": "commonjs",
     "lib": [
       "es2020",
       "dom"
     ]
   },
+  "include": [
+    "./scripts",
+    "./test",
+    "./src/**/**/*.ts"
+  ],
+  "files": ["./hardhat.config.ts"],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

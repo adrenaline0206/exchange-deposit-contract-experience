@@ -13,14 +13,11 @@ export class ViewHomeComponent implements OnInit {
   @Input() contract?: ethers.Contract;
   @Input() deployTransaction?: ethers.providers.TransactionResponse;
   @Input() setDeployNewInstanceTransaction?: ethers.providers.TransactionResponse;
-  @Input() greets?: string[];
 
-  @Output() connectToMetaMask = new EventEmitter();
   @Output() deployProxyFactoryContract = new EventEmitter();
-  @Output() callGreetFunction = new EventEmitter();
-  @Output() callSetGreetingFunction = new EventEmitter();
   @Output() callSetDeployNewInstance = new EventEmitter();
   @Output() callSendEther = new EventEmitter();
+  @Output() callSetSendAddress = new EventEmitter();
   @Output() goToLink = new EventEmitter();
 
   constructor() {
@@ -37,16 +34,12 @@ export class ViewHomeComponent implements OnInit {
     this.deployProxyFactoryContract.emit();
   }
 
-  onCallGreetFunction(): void{
-    this.callGreetFunction.emit();
-  }
-
-  onCallSetGreetingFunction(newGreetingMessage: string): void {
-    this.callSetGreetingFunction.emit(newGreetingMessage);
-  }
-
   onCallSetDeployNewInstance(salt: string): void {
     this.callSetDeployNewInstance.emit(salt);
+  }
+
+  onCallSetSendAddressFunction(sendAddress: string): void {
+    this.callSetSendAddress.emit(sendAddress);
   }
 
   onCallSetSendFundsFunction(sendAmount: string): void {

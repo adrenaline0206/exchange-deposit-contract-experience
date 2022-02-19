@@ -4,10 +4,10 @@
   [contract]="contract"
   [deployTransaction]="deployTransaction"
   [deployNewInstanceTransactionHash]="deployNewInstanceTransactionHash"
-  [greets]="greets"
   (connectToMetaMask)="appConnectToMetaMask()"
   (deployProxyFactoryContract)="appDeployProxyFactoryContract()"
   (callSetDeployNewInstance)="appCallSetDeployNewInstance($event)"
+  (callSetSendAddress)="setSendAddress($event)"
   (callSendEther)="appCallSendEther($event)"
   (goToLink)="goToLink($event)"
 ></app-view-home>
