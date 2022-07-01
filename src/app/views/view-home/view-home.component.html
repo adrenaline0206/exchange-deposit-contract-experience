@@ -1,10 +1,10 @@
-<h1 class="display-5">Smart Lending</h1>
+<h1 class="display-5">Let's try Exchange Deposit Contract!</h1>
 
-<h2>Status</h2>
+<h2>①Check your metamask account</h2>
 <div>Your Current Address: {{ currentAccount }}</div>
 <div>Your Current Network: {{ currentNetwork }}</div>
 
-<h2>Deploy Proxy Factory Contract</h2>
+<h2>②Deploy Proxy Factory Contract</h2>
 <div>Contract Address:
   <a (click)="onGoToLink('address/' + contract!.address)">{{ contract?.address }}</a>
 </div>
@@ -14,15 +14,11 @@
 <br>
 <button class="btn btn-primary" (click)="onDeployProxyFactoryContract()">Deploy</button>
 
-<h2>App DeployNewInstance</h2>
+<h2>③Run DeployNewInstance</h2>
 <div>Contract Address:
   <a (click)="onGoToLink('tx/' + deployNewInstanceTransactionHash)">{{ deployNewInstanceTransactionHash }}</a>
-</div>
-<br>
 <form #formRef="ngForm">
   <div class="form-control">
-    salt example: 0x0000000000000000000000AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA00
-    <br>
     <label class="label">
       <span class="label-text">salt</span>
     </label>
@@ -34,14 +30,16 @@
     required
     />
   </div>
+  
+  ※salt example: 0x0000000000000000000000AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA00
   <button class="btn btn-primary" (click)="onCallSetDeployNewInstance(saltRef.value)" [disabled]="formRef.invalid">Set Salt</button>
 </form>
 
-<h2>Let's start Smart Lending!</h2>
+<h2>④Let's send amount</h2>
 <form #formRef="ngForm" (submit)="onCallSetSendAddressFunction(sendAddressRef.value)">
   <div class="form-control">
     <label class="label">
-      <span class="label-text">Lending address</span>
+      <span class="label-text">Send address</span>
     </label>
     <input
     class="input input-bordered"
@@ -57,7 +55,7 @@
 <form #formRef="ngForm" (submit)="onCallSetSendFundsFunction(sendAmountRef.value)">
   <div class="form-control">
     <label class="label">
-      <span class="label-text">Lending amount</span>
+      <span class="label-text">Send amount</span>
     </label>
     <input
     class="input input-bordered"

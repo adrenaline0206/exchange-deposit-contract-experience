@@ -47,10 +47,10 @@ export class HomeComponent implements OnInit {
       console.error('It is not MetaMask!');
       return;
     }
+    console.log('connection to metamask was successful!!')
     try {
       // https://docs.metamask.io/guide/rpc-api.html#table-of-contents
       this.accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-      console.log('accounts', this.accounts);
     } catch (error) {
       console.error('Failed to get MetaMask Accounts!');
       console.error(error);
@@ -62,7 +62,6 @@ export class HomeComponent implements OnInit {
     }
     try {
       this.currentAccount = (window as any).ethereum.selectedAddress;
-      console.log('currentAccount', this.currentAccount);
     } catch (error) {
       console.error(error);
       console.error('Failed to select MetaMask 1st Account!');
@@ -80,12 +79,11 @@ export class HomeComponent implements OnInit {
     this.contractFactory = new ethers.ContractFactory(this.proxyFactoryAbi, this.proxyFactoryBytecode, this.signer);
     this.contract = await this.contractFactory.deploy(EXCHANGE_DEPOSIT_CONTRACT_ADDRESS);
     console.log('contract', this.contract);
-    console.log('contractAddress', this.contractAddress);
-    console.log('deployTransaction', this.deployTransaction);
     this.contractAddress = this.contract.address;
     await this.contract.deployTransaction.wait(1);
     console.log(`deployTransaction is 1 confirmed`);
     this.deployTransaction = this.contract.deployTransaction;
+    console.log('deployTransaction', this.deployTransaction);
   }
 
   async appCallSetDeployNewInstance(salt: string): Promise<void> {
@@ -103,6 +101,7 @@ export class HomeComponent implements OnInit {
     if(!ethers.utils.isAddress(`${sendAddress}`)){
       throw new Error('invalid address')
     }
+    console.log('setSendAddress', sendAddress);
     this.deployNewInstanceAddress = sendAddress;
   }
 
