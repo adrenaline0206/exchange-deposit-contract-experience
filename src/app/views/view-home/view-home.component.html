@@ -6,10 +6,10 @@
 
 <h2>②Deploy Proxy Factory Contract</h2>
 <div>Contract Address:
-  <a (click)="onGoToLink('address/' + contract!.address)">{{ contract?.address }}</a>
+  <a (click)="onGoToLink('address/' + contract?.address)">{{ contract?.address }}</a>
 </div>
 <div>Deploy Transaction Hash:
-  <a (click)="onGoToLink('tx/' + deployTransaction!.hash)">{{ deployTransaction?.hash }}</a>
+  <a (click)="onGoToLink('tx/' + deployTransaction?.hash)">{{ deployTransaction?.hash }}</a>
 </div>
 <br>
 <button class="btn btn-primary" (click)="onDeployProxyFactoryContract()">Deploy</button>
@@ -30,9 +30,9 @@
     required
     />
   </div>
-  
-  ※salt example: 0x0000000000000000000000AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA00
   <button class="btn btn-primary" (click)="onCallSetDeployNewInstance(saltRef.value)" [disabled]="formRef.invalid">Set Salt</button>
+  <br>
+  ※salt example: 0x0000000000000000000000AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA00
 </form>
 
 <h2>④Let's send amount</h2>

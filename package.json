@@ -1,5 +1,5 @@
 {
-  "name": "metamask-samples",
+  "name": "exchage-deposit-contract-experience",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -46,6 +46,7 @@
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "prettier": "1.19.1",
     "typescript": "~4.5.2"
   }
 }
