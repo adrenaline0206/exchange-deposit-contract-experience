@@ -9,7 +9,7 @@ For a good overview and starting point, please check out [here](https://github.c
 ## Table of Contents
 
 - [Background](https://github.com/adrenaline0206/exchange-deposit-contract-experience#Background)
-- [Development server](https://github.com/adrenaline0206/exchange-deposit-contract-experience#Development server)
+- [Development](https://github.com/adrenaline0206/exchange-deposit-contract-experience#Development server)
 - [Documentation](https://github.com/adrenaline0206/exchange-deposit-contract-experience#Documentation)
 - [License](https://github.com/adrenaline0206/exchange-deposit-contract-experience#License)
 
@@ -17,13 +17,15 @@ For a good overview and starting point, please check out [here](https://github.c
 
 The Exchange Deposit Contract is Ethereum or ERC20 deposit detection system developed by Bitbank.　This system is a practical example of using contract. Learning this system is very useful for understanding structure　 of contract.
 
-## Development server
+## Development
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Documentation
+
 The Exchange Deposit Contract documentation is [here](https://github.com/adrenaline0206/exchange-deposit-contract-explanation).
 
 ## License
+
 MIT
 
