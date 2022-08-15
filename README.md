@@ -9,7 +9,7 @@ For a good overview and starting point, please check out [here](https://github.c
 ## Table of Contents
 
 - [Background](https://github.com/adrenaline0206/exchange-deposit-contract-experience#Background)
-- [Development](https://github.com/adrenaline0206/exchange-deposit-contract-experience#Development server)
+- [Development](https://github.com/adrenaline0206/exchange-deposit-contract-experience#Development)
 - [Documentation](https://github.com/adrenaline0206/exchange-deposit-contract-experience#Documentation)
 - [License](https://github.com/adrenaline0206/exchange-deposit-contract-experience#License)
 
