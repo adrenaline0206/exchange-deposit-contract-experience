@@ -1,27 +1,29 @@
-# MetamaskSamples
+# The Exchange Deposit Contract Experience
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
+Questions, feedback, and suggestions are welcome!
+
+The Exchange Deposit Contract Experience is web application that allows you to learn from experience the [Exchange Deposit Contract](https://github.com/bitbankinc/exchangeDepositContract) developed by bitbank.
+
+For a good overview and starting point, please check out [here](https://github.com/adrenaline0206/exchange-deposit-contract-explanation).
+
+## Table of Contents
+
+- [Background](https://github.com/adrenaline0206/exchange-deposit-contract-experience#Background)
+- [Development server](https://github.com/adrenaline0206/exchange-deposit-contract-experience#Development server)
+- [Documentation](https://github.com/adrenaline0206/exchange-deposit-contract-experience#Documentation)
+- [License](https://github.com/adrenaline0206/exchange-deposit-contract-experience#License)
+
+## Background
+
+The Exchange Deposit Contract is Ethereum or ERC20 deposit detection system developed by Bitbank.　This system is a practical example of using contract. Learning this system is very useful for understanding structure　 of contract.
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Documentation
+The Exchange Deposit Contract documentation is [here](https://github.com/adrenaline0206/exchange-deposit-contract-explanation).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## License
+MIT
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
