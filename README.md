@@ -6,6 +6,8 @@ The Exchange Deposit Contract Experience is web application that allows you to l
 
 For a good overview and starting point, please check out [here](https://github.com/adrenaline0206/exchange-deposit-contract-explanation).
 
+<img width="1259" alt="スクリーンショット 2022-08-22 11 42 37" src="https://user-images.githubusercontent.com/11623099/185828520-462b2047-f64c-4f85-a00c-2878a858802e.png">
+
 ## Table of Contents
 
 - [Background](https://github.com/adrenaline0206/exchange-deposit-contract-experience#Background)
